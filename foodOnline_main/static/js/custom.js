@@ -39,31 +39,93 @@ function onPlaceChanged() {
       $("#id_latitude").val(latitude);
       $("#id_longitude").val(longitude);
       $("#id_address").val(address);
-
     }
   });
 
   // Loop through the address components and assign other address data
-  for (var i=0; i<place.address_components.length; i++){
-    for(var j=0; j<place.address_components[i].types.length; j++){
-        // get country
-        if (place.address_components[i].types[j] == 'country'){
-            $("#id_country").val(place.address_components[i].long_name);
-        }
-        // get state
-        if (place.address_components[i].types[j] == 'administrative_area_level_1'){
-            $("#id_state").val(place.address_components[i].long_name);
-        }
-        // get city
-        if (place.address_components[i].types[j] == 'locality'){
-            $("#id_city").val(place.address_components[i].long_name);
-        }
-        // get pincode
-        if (place.address_components[i].types[j] == 'postal_code'){
-            $("#id_pin_code").val(place.address_components[i].long_name);
-        }else{
-            $("#id_pin_code").val("")
-        }
+  for (var i = 0; i < place.address_components.length; i++) {
+    for (var j = 0; j < place.address_components[i].types.length; j++) {
+      // get country
+      if (place.address_components[i].types[j] == "country") {
+        $("#id_country").val(place.address_components[i].long_name);
+      }
+      // get state
+      if (
+        place.address_components[i].types[j] == "administrative_area_level_1"
+      ) {
+        $("#id_state").val(place.address_components[i].long_name);
+      }
+      // get city
+      if (place.address_components[i].types[j] == "locality") {
+        $("#id_city").val(place.address_components[i].long_name);
+      }
+      // get pincode
+      if (place.address_components[i].types[j] == "postal_code") {
+        $("#id_pin_code").val(place.address_components[i].long_name);
+      } else {
+        $("#id_pin_code").val("");
+      }
     }
   }
 }
+
+$(document).ready(function () {
+  // Add to cart
+  $(".add_to_cart").on("click", function (e) {
+    e.preventDefault();
+
+    food_id = $(this).attr("data-id");
+    url = $(this).attr("data-url");
+
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function (response) {
+        console.log(response);
+        if (response.status == "login_required") {
+          swal(response.message, "", "info").then(function () {
+            window.location = "/login";
+          });
+        } else if (response.status == "Failed") {
+          swal(response.message, "", "error");
+        } else {
+          $("#cart_counter").html(response.cart_counter["cart_count"]);
+          $("#qty-" + food_id).html(response.qty);
+        }
+      },
+    });
+  });
+
+  // Place the cart item quantity on load
+  $(".item_qty").each(function () {
+    var the_id = $(this).attr("id");
+    var qty = $(this).attr("data-qty");
+    $("#" + the_id).html(qty);
+  });
+
+  // Decrease cart
+  $(".decrease_cart").on("click", function (e) {
+    e.preventDefault();
+
+    food_id = $(this).attr("data-id");
+    url = $(this).attr("data-url");
+
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function (response) {
+        console.log(response);
+        if (response.status == "login_required") {
+          swal(response.message, "", "info").then(function () {
+            window.location = "/login";
+          });
+        } else if (response.status == "Failed") {
+          swal(response.message, "", "error");
+        } else {
+          $("#cart_counter").html(response.cart_counter["cart_count"]);
+          $("#qty-" + food_id).html(response.qty);
+        }
+      },
+    });
+  });
+});
