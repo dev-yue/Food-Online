@@ -1,12 +1,14 @@
 setup:
   config: {}
 build:
+  packages:
+    - gdal-bin
   languages:
     - >-
       https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/apt.tgz
 run:
   web: gunicorn foodOnline_main.wsgi
 release:
-  image: web
   command: 
     - python manage.py migrate
+  image: web
