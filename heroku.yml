@@ -10,4 +10,5 @@ run:
   web: gunicorn foodOnline_main.wsgi
 release:
   image: web
-  command: python manage.py migrate
+  command: 
+    - python manage.py migrate
