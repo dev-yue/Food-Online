@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mm-y855qh-xsttv#i*lj-ndz&-=g(_f=c1a(3b-5y1hbl-(!f%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['obscure-wildwood-70593.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'obscure-wildwood-70593.herokuapp.com']
 
 
 # Application definition
@@ -104,7 +104,10 @@ WSGI_APPLICATION = "foodOnline_main.wsgi.application"
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db')}
+# DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db')}
+DATABASES = {
+    'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
+}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -188,6 +191,5 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 # Whitenoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-import django_heroku
-django_heroku.settings(locals(), databases=False)
+
 
