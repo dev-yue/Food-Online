@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 import os
 import dj_database_url
+import django
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -103,7 +104,7 @@ WSGI_APPLICATION = "foodOnline_main.wsgi.application"
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db', conn_max_age=600, ssl_require=True)}
+DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db')}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -186,4 +187,6 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 # Whitenoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django.settings(locals(), database=False)
 
