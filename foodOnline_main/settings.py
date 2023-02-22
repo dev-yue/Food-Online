@@ -103,7 +103,7 @@ WSGI_APPLICATION = "foodOnline_main.wsgi.application"
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db')}
+DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db', conn_max_age=600, ssl_require=True)}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -187,5 +187,3 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 # Whitenoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
