@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'orders.request_object.RequestObjectMiddleware', # custom middleware created to acess the request object in model.py
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "foodOnline_main.urls"
@@ -90,16 +92,18 @@ WSGI_APPLICATION = "foodOnline_main.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        # "ENGINE": "django.db.backends.postgresql",
-        'ENGINE': "django.contrib.gis.db.backends.postgis",
-        "NAME": config('DB_NAME'),
-        "USER": config('DB_USER'),
-        "PASSWORD": config('DB_PASSWORD'),
-        "HOST": config('DB_HOST'),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         # "ENGINE": "django.db.backends.postgresql",
+#         'ENGINE': "django.contrib.gis.db.backends.postgis",
+#         "NAME": config('DB_NAME'),
+#         "USER": config('DB_USER'),
+#         "PASSWORD": config('DB_PASSWORD'),
+#         "HOST": config('DB_HOST'),
+#     }
+# }
+
+DATABASES = {'default': dj_database_url.config(default='postgis://postgres:admin@localhost/foodOnline_db')}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -177,3 +181,6 @@ GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.
 PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+
+# Whitenoise settings
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
