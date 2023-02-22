@@ -188,5 +188,6 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 # Whitenoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django.settings(locals(), database=False)
+import django_heroku
+django_heroku.settings(locals(), databases=False)
 
