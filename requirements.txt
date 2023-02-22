@@ -5,7 +5,7 @@ django-admin-honeypot-updated-2021==1.2.0
 django-admin-thumbnails==0.2.6
 django-ipware==4.0.2
 django-session-timeout==0.1.0
-GDAL @ file:///D:/19-Udemy-django/FoodOnline/GDAL-3.4.3-cp311-cp311-win_amd64.whl
+# GDAL @ file:///D:/19-Udemy-django/FoodOnline/GDAL-3.4.3-cp311-cp311-win_amd64.whl
 gunicorn==20.1.0
 Pillow==9.4.0
 psycopg2==2.9.5
