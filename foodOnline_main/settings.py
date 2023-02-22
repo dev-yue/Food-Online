@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mm-y855qh-xsttv#i*lj-ndz&-=g(_f=c1a(3b-5y1hbl-(!f%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'obscure-wildwood-70593.herokuapp.com']
+ALLOWED_HOSTS = ['obscure-wildwood-70593.herokuapp.com']
 
 
 # Application definition
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "vendor",
     "menu",
     "marketplace",
-    'django.contrib.gis',
+    # 'django.contrib.gis',
     'customers',
     'orders',
 ]
@@ -181,8 +181,8 @@ GOOGLE_API_KEY = 'AIzaSyCE806dvSez4172fibxSfHi4DmVMv6LSy4'
 # os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 # os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
 # GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
-GEOS_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgeos_c.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('GEOS_LIBRARY_PATH')
-GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('GDAL_LIBRARY_PATH')
+# GEOS_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgeos_c.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('GEOS_LIBRARY_PATH')
+# GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('GDAL_LIBRARY_PATH')
 
 PAYPAL_CLIENT_ID = 'AQsxY2GmO1tO4p-xjOyeCUI--aiqsyNTM2mBDeP4-prRWDjEdLG1ym4BxWO2ZuGp30gJ5K66Xv1x0yzE'
 
